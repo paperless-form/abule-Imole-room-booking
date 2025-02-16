@@ -1,0 +1,158 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body,
+html {
+    height: 100%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.background-wrapper {
+    background-image: url('/room.jpg');
+    /* Replace with your image path */
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.form-container {
+    background: rgba(255, 245, 235, 0.75);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 40px;
+    border-radius: 15px;
+    width: 100%;
+    max-width: 60%;
+    box-shadow: 0 8px 32px rgba(139, 69, 19, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.contact-form h2 {
+    color: #5D2906;
+    margin-bottom: 30px;
+    text-align: center;
+    font-size: 2em;
+    font-weight: bold;
+}
+
+.form-group {
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-bottom: 2px solid #8B4513;
+    background: rgba(255, 255, 255, 0.5);
+    color: #3E1800;
+    font-size: 16px;
+    outline: none;
+    border-radius: 4px;
+}
+
+.form-group label {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    color: #5D2906;
+    transition: 0.3s ease all;
+    pointer-events: none;
+    font-weight: 500;
+}
+
+.form-group input:focus~label,
+.form-group input:valid~label,
+.form-group textarea:focus~label,
+.form-group textarea:valid~label {
+    top: -20px;
+    font-size: 14px;
+    color: #D2691E;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    background: rgba(255, 255, 255, 0.8);
+    border-bottom-color: #5D2906;
+}
+
+.price-box {
+    background: rgba(255, 255, 255, 0.8);
+    padding: 15px;
+    border-radius: 8px;
+    border: 2px solid #8B4513;
+    margin-top: 20px;
+}
+
+.price-box input {
+    background: transparent !important;
+    font-size: 24px !important;
+    font-weight: bold;
+    color: #5D2906 !important;
+    text-align: center;
+    border: none !important;
+}
+
+.price-label {
+    position: static !important;
+    display: block;
+    text-align: center;
+    margin-bottom: 5px;
+    color: #5D2906;
+    font-weight: bold;
+}
+
+button {
+    width: 100%;
+    padding: 15px;
+    background: #8B4513;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s ease;
+    font-weight: bold;
+}
+
+button:hover {
+    background: #5D2906;
+    transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+    .background-wrapper {
+        padding: 10px;
+        align-items: flex-start;
+        padding-top: 20px;
+    }
+
+    .form-container {
+        padding: 20px;
+        margin: 10px 0;
+    }
+
+    .contact-form h2 {
+        font-size: 1.5em;
+        margin-bottom: 20px;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .price-box {
+        margin-top: 15px;
+        padding: 10px;
+    }
+}
