@@ -31,7 +31,7 @@ html {
     padding: 40px;
     border-radius: 15px;
     width: 100%;
-    max-width: 60%;
+    max-width: 40%;
     box-shadow: 0 8px 32px rgba(139, 69, 19, 0.2);
     border: 1px solid rgba(255, 255, 255, 0.2);
     margin: 40px 0;
@@ -157,5 +157,360 @@ button:hover {
     .price-box {
         margin-top: 15px;
         padding: 10px;
+    }
+}
+
+/* Date picker styling */
+.datepicker {
+    background-color: rgba(255, 255, 255, 0.95) !important;
+    border-radius: 4px !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+}
+
+.datepicker table {
+    background: white !important;
+}
+
+.datepicker table tr td,
+.datepicker table tr th {
+    color: #333 !important;
+    font-weight: 500 !important;
+    padding: 7px !important;
+    font-size: 14px !important;
+}
+
+.datepicker table tr th {
+    background: #f8f9fa !important;
+    color: #5D2906 !important;
+    font-weight: 600 !important;
+}
+
+.datepicker table tr td.active.active {
+    background-color: #8B4513 !important;
+    background-image: none !important;
+    color: white !important;
+    font-weight: bold !important;
+}
+
+.datepicker table tr td.today {
+    background-color: rgba(139, 69, 19, 0.2) !important;
+    background-image: none !important;
+    color: #333 !important;
+    font-weight: bold !important;
+}
+
+.datepicker table tr td:hover {
+    background-color: rgba(139, 69, 19, 0.1) !important;
+}
+
+/* Style the datepicker header */
+.datepicker-days thead tr:first-child th {
+    background: #8B4513 !important;
+    color: white !important;
+    border-radius: 4px 4px 0 0;
+    padding: 10px !important;
+}
+
+.datepicker-days thead tr:first-child th:hover {
+    background: #5D2906 !important;
+}
+
+/* Style the month/year selectors */
+.datepicker-switch,
+.prev,
+.next {
+    cursor: pointer;
+}
+
+/* Meals section styling */
+.meals-section {
+    background: rgba(255, 255, 255, 0.5);
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+}
+
+.meals-title {
+    color: #5D2906;
+    font-weight: 500;
+    margin-bottom: 15px;
+}
+
+.custom-checkbox {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.meal-checkbox {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    cursor: pointer;
+    accent-color: #8B4513;
+}
+
+.custom-checkbox label {
+    color: #5D2906;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+/* Mobile responsiveness for meals section */
+@media (max-width: 768px) {
+    .meals-section {
+        padding: 15px;
+        margin-bottom: 20px;
+    }
+
+    .custom-checkbox {
+        margin-bottom: 8px;
+    }
+}
+
+/* Select element styling */
+select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background: rgba(255, 255, 255, 0.75) url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238B4513' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e") no-repeat right 10px center;
+    background-size: 20px;
+    padding: 12px 40px 12px 15px !important;
+    border: 1px solid rgba(139, 69, 19, 0.3) !important;
+    border-radius: 6px !important;
+    color: #5D2906 !important;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    width: 100%;
+    transition: all 0.3s ease;
+}
+
+select:hover {
+    background-color: rgba(255, 255, 255, 0.9);
+    border-color: rgba(139, 69, 19, 0.5) !important;
+}
+
+select:focus {
+    outline: none;
+    border-color: #8B4513 !important;
+    background-color: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 0 0 3px rgba(139, 69, 19, 0.2);
+}
+
+/* Style the options */
+select option {
+    background: white;
+    color: #5D2906;
+    padding: 10px;
+}
+
+/* Style the disabled option */
+select option:disabled {
+    color: #999;
+}
+
+/* Style for the select container */
+.form-group select {
+    margin-bottom: 0;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    select {
+        padding: 10px 35px 10px 12px !important;
+        background-size: 16px;
+        font-size: 15px;
+    }
+}
+
+/* Date picker input specific styling */
+.form-group input.datepicker {
+    padding-left: 15px;
+}
+
+.form-group input.datepicker+label {
+    left: 15px;
+    transform: translateY(-20px);
+    font-size: 14px;
+    color: #5D2906;
+    background: transparent;
+}
+
+/* Ensure datepicker popup appears above everything */
+.datepicker-dropdown {
+    z-index: 9999 !important;
+    border: 1px solid rgba(139, 69, 19, 0.2);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Style for disabled dates */
+.datepicker table tr td.disabled,
+.datepicker table tr td.disabled:hover {
+    color: #dc3545 !important;
+    /* Bootstrap's danger red color */
+    text-decoration: line-through;
+    opacity: 0.7;
+    cursor: not-allowed;
+    background: rgba(220, 53, 69, 0.1) !important;
+    /* Light red background */
+}
+
+/* Ensure the datepicker cell spacing remains consistent */
+.datepicker table tr td {
+    padding: 8px !important;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    border-radius: 4px;
+}
+
+/* Add these styles to your CSS file */
+.loader-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 245, 235, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+}
+
+.loader-content {
+    text-align: center;
+}
+
+.hotel-loader {
+    display: inline-block;
+    position: relative;
+    width: 120px;
+    height: 90px;
+}
+
+.hotel {
+    width: 120px;
+    height: 90px;
+    background: #8B4513;
+    border-radius: 8px;
+    position: relative;
+    animation: float 2s infinite ease-in-out;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.bed {
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 25px;
+    background: #5D2906;
+    border-radius: 4px;
+}
+
+.pillow {
+    position: absolute;
+    top: -8px;
+    left: 5px;
+    width: 20px;
+    height: 12px;
+    background: #FFF;
+    border-radius: 3px;
+}
+
+.blanket {
+    position: absolute;
+    top: -4px;
+    right: 5px;
+    width: 25px;
+    height: 20px;
+    background: #D2691E;
+    border-radius: 3px;
+    animation: blanketMove 2s infinite ease-in-out;
+}
+
+.loading-text {
+    color: #FFF;
+    font-size: 14px;
+    font-weight: 500;
+    text-align: center;
+    margin-top: 5px;
+    animation: pulse 1.5s infinite ease-in-out;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+}
+
+@keyframes windowGlow {
+
+    0%,
+    100% {
+        background: rgba(255, 255, 255, 0.9);
+    }
+
+    50% {
+        background: rgba(255, 245, 220, 0.7);
+    }
+}
+
+@keyframes blanketMove {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-2px);
+    }
+}
+
+/* Update mobile styles */
+@media (max-width: 768px) {
+    .hotel-loader {
+        width: 90px;
+        height: 70px;
+    }
+
+    .hotel {
+        width: 90px;
+        height: 70px;
+        padding: 8px;
+    }
+
+    .bed {
+        width: 45px;
+        height: 20px;
+        bottom: 10px;
+    }
+
+    .pillow {
+        width: 15px;
+        height: 10px;
+    }
+
+    .blanket {
+        width: 20px;
+        height: 15px;
+    }
+
+    .loading-text {
+        font-size: 12px;
     }
 }
