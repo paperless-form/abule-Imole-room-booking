@@ -374,9 +374,12 @@
             var arrivalDate = $('#arrival_date').val();
             var departureDate = $('#departure_date').val();
 
-            var numberOfDays = calculateNumberOfDays(arrivalDate, departureDate);
+            if (arrivalDate !== "" && departureDate !== "") {
 
-            total_price += parseFloat(room_price) * (numberOfDays + 1);
+                var numberOfDays = calculateNumberOfDays(arrivalDate, departureDate);
+
+                total_price += parseFloat(room_price) * (numberOfDays + 1);
+            }
 
             $('#price').val('₦' + total_price.toFixed(2));
         }
