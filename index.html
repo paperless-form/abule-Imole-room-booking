@@ -82,6 +82,14 @@
                     <div class="error"></div>
                 </div>
 
+                <label for="lastname" style="color: #9202a3;">Number of persons <span
+                        style="color: #9202a3;">*</span></label>
+                <div class="form-group">
+                    <input type="text" id="no-of-persons" class="required" name="no_of_persons" value="1">
+                    <div class="error"></div>
+                    <div>1 bed = ₦<span id="bed_price"></span></div>
+                </div>
+
                 <label style="color: #9202a3;margin-left: 0.7rem;">Arrival Date <span
                         style="color: #9202a3;">*</span></label>
                 <div class="form-group">
@@ -98,19 +106,20 @@
                     <div class="error"></div>
                 </div>
 
+
                 <div class="meals-section">
                     <p class="meals-title">Please select meals to be included in your booking:</p>
                     <div class="custom-checkbox">
                         <input type="checkbox" id="breakfast" class="meal-checkbox" value="breakfast" name="meals">
-                        <label for="breakfast">Breakfast</label>
+                        <label for="breakfast">Breakfast (1 person = ₦<span id="breakfast_price"></span>)</label>
                     </div>
                     <div class="custom-checkbox">
                         <input type="checkbox" id="lunch" class="meal-checkbox" value="lunch" name="meals">
-                        <label for="lunch">Lunch</label>
+                        <label for="lunch">Lunch (1 person = ₦<span id="lunch_price"></span>)</label>
                     </div>
                     <div class="custom-checkbox">
                         <input type="checkbox" id="dinner" class="meal-checkbox" value="dinner" name="meals">
-                        <label for="dinner">Dinner</label>
+                        <label for="dinner">Dinner (1 person = ₦<span id="dinner_price"></span>)</label>
                     </div>
                     <div class="custom-checkbox">
                         <input type="checkbox" id="no_meals" class="meal-checkbox" value="No meals" name="meals">
@@ -125,7 +134,7 @@
                     like to be picked
                     up from the
                     train
-                    station? <span style="color: #9202a3;">*</span></p>
+                    station? (₦<span id="train_price_yes"></span>)<span style="color: #9202a3;">*</span></p>
                 <div class="form-group">
                     <select id="train" class="required" name="train">
                         <option value="" disabled selected>Select Option</option>
@@ -183,27 +192,34 @@
                 container: '.form-container'
             });
             var d = new Date();
+            //Feb
+            var month_arr = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
             $('.today').val(addZero(d.getDate()) + '/' + addZero(d.getMonth() + 1) + '/' + d.getFullYear());
-            $('.order-ref').val(d.getFullYear().toString().substr(-2) + '' + addZero(d.getDate()) + '' + addZero(d.getMonth() + 1) + '' + addZero(d.getHours()) + '' + addZero(d.getMinutes()) + '' + addZero(d.getSeconds()))
+            $('.order-ref').val(month_arr[d.getMonth()] + ' - ' + addZero(d.getDate()) + '' + addZero(d.getMonth() + 1) + '' + d.getFullYear().toString().substr(-2))
             // Add this to hide loader and show form after AJAX
             $.get('https://script.google.com/macros/s/AKfycbwbGTn5ysDa0eK4Mgy7f1s1sa--daQUIBWKLej0k7OB6UWXfZxuYop2NT6Fgnn0iqWX/exec', function (response) {
                 var prices = response.prices;
 
                 prices.forEach(function (price) {
                     if (price[0].trim().toLowerCase().includes('breakfast')) {
-                        breakfast_price = price[1];
+                        breakfast_price = price[1].trim().replace(/,/g, '');
+                        $('#breakfast_price').text(price[1].trim());
                     }
                     if (price[0].trim().toLowerCase().includes('lunch')) {
-                        lunch_price = price[1];
+                        lunch_price = price[1].trim().replace(/,/g, '');
+                        $('#lunch_price').text(price[1].trim());
                     }
                     if (price[0].trim().toLowerCase().includes('dinner')) {
-                        dinner_price = price[1];
+                        dinner_price = price[1].trim().replace(/,/g, '');
+                        $('#dinner_price').text(price[1].trim());
                     }
                     if (price[0].trim().toLowerCase().includes('train')) {
-                        train_price = price[1];
+                        train_price = price[1].trim().replace(/,/g, '');
+                        $('#train_price_yes').text(price[1].trim());
                     }
                     if (price[0].trim().toLowerCase().includes('room')) {
-                        room_price = price[1];
+                        room_price = price[1].trim().replace(/,/g, '');
+                        $('#bed_price').text(price[1].trim());
                     }
                 });
 
@@ -243,8 +259,8 @@
                     success: function (response) {
                         if (response.result == "success") {
                             swal({
-                                title: "Booking Confirmed",
-                                text: "Please Check Email For Invoice",
+                                title: "Booking Confirmed.",
+                                text: "Please check your email for payment details.",
                                 icon: "success",
                             })
                                 // $('#confirm-booking').removeAttr('disabled');
@@ -293,6 +309,19 @@
                 else {
                     calculateTotalPrice();
                 }
+            }
+        })
+
+        $(document).on('input', '#no-of-persons', function () {
+            $(this).val($(this).val().replace(/[^0-9]/g, ''));
+            $(this).closest('.form-group').find('.error').empty();
+            if (parseInt($(this).val()) >= 1) {
+                console.log($(this).val());
+                calculateTotalPrice();
+            }
+            else if ($(this).val() !== "") {
+                $(this).val('');
+                $(this).closest('.form-group').find('.error').append('Please enter number only at-least 1');
             }
         })
 
@@ -372,7 +401,7 @@
 
             var train_pickup = $('#train').find(":selected").val();
             if (train_pickup == 'yes') {
-                total_price += parseFloat(train_price);
+                total_price += parseFloat(train_price) * 2;
                 $('.train_price').val(train_price);
             }
 
@@ -390,6 +419,10 @@
             }
             else {
                 total_price += parseFloat(meal_price);
+            }
+
+            if (parseFloat(total_price) >= 1) {
+                total_price = parseFloat(total_price) * parseFloat($('#no-of-persons').val());
             }
 
             $('#price').val('₦' + total_price.toFixed(2));
