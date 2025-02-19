@@ -101,8 +101,8 @@
                 <label style="color: #9202a3;margin-left: 0.7rem;">Departure Date <span
                         style="color: #9202a3;">*</span></label>
                 <div class="form-group">
-                    <input type="text" id="departure_date" class="datepicker required" autocomplete="off" readonly
-                        name="departure_date">
+                    <input type="text" id="departure_date" class="datepicker-departure required" autocomplete="off"
+                        readonly name="departure_date">
                     <div class="error"></div>
                 </div>
 
@@ -187,6 +187,14 @@
                 format: 'dd/mm/yyyy',
                 autoclose: true,
                 startDate: new Date(new Date()),
+                todayHighlight: true,
+                orientation: 'bottom auto',
+                container: '.form-container'
+            });
+            $('.datepicker-departure').datepicker({
+                format: 'dd/mm/yyyy',
+                autoclose: true,
+                startDate: new Date(new Date().setDate(new Date().getDate() + 1)),
                 todayHighlight: true,
                 orientation: 'bottom auto',
                 container: '.form-container'
@@ -296,7 +304,7 @@
             }
         });
 
-        $(document).on('change', '.datepicker', function () {
+        $(document).on('change', '.datepicker, .datepicker-departure', function () {
             var arrivalDate = $('#arrival_date').val();
             var departureDate = $('#departure_date').val();
 
@@ -401,7 +409,7 @@
 
             var train_pickup = $('#train').find(":selected").val();
             if (train_pickup == 'yes') {
-                total_price += parseFloat(train_price) * 2;
+                total_price += parseFloat(train_price);
                 $('.train_price').val(train_price);
             }
 
@@ -411,10 +419,10 @@
             if (arrivalDate !== "" && departureDate !== "") {
 
                 var numberOfDays = calculateNumberOfDays(arrivalDate, departureDate);
-                $('.qty').val(numberOfDays + 1);
+                $('.qty').val(numberOfDays);
 
-                total_price += parseFloat(room_price) * (numberOfDays + 1);
-                total_price += parseFloat(meal_price) * (numberOfDays + 1);
+                total_price += parseFloat(room_price) * (numberOfDays);
+                total_price += parseFloat(meal_price) * (numberOfDays);
                 $('.room_price').val(room_price);
             }
             else {
